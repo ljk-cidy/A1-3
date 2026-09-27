@@ -1,0 +1,11 @@
+my-ai-app/
+├── index.html          # 메인 프론트엔드 페이지
+├── css/
+│   └── style.css       # 스타일시트
+├── js/
+│   └── main.js         # 프론트엔드 자바스크립트 (API 호출)
+├── api/
+│   └── recommend.py    # Vercel Serverless Function (Python API)
+├── requirements.txt    # Python 패키지 목록 (openai 등)
+├── vercel.json         # Vercel 설정 파일 (필요시)
+└── README.md           # 프로젝트 문서
