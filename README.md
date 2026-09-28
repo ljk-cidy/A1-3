@@ -61,9 +61,9 @@ $$
 
 ## 🔗 2. 배포 URL
 
-* **서비스 웹사이트:** [https://](https://본인-프로젝트-이름.vercel.app)a1-3-eight[.vercel.app](https://본인-프로젝트-이름.vercel.app)
+* **서비스 웹사이트:** [https://](https://a1-3-eight.vercel.app)a1-3-eight[.vercel.app](https://a1-3-eight.vercel.app)
 
-* **GitHub 저장소:** [https://github.com/](https://github.com/본인-계정명/저장소-이름?utm_source=gemini)ljk-cidy/A1-3
+* **GitHub 저장소:** [https://github.com/](https://github.com/ljk-cidy/A1-3?utm_source=gemini)ljk-cidy/A1-3
 
 ## 🛠️ 3. 기술 스택 (Tech Stack)
 
