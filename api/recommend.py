@@ -10,6 +10,18 @@ class handler(BaseHTTPRequestHandler):
         self.end_headers()
         self.wfile.write(json.dumps(payload, ensure_ascii=False).encode("utf-8"))
 
+    def do_GET(self):
+        names = sorted(
+            k for k in os.environ
+            if any(w in k.upper() for w in ("GEMINI", "GOOGLE", "API", "KEY"))
+        )
+        value = os.environ.get("GEMINI_API_KEY", "")
+        self._send(200, {
+            "matching_env_names": names,
+            "GEMINI_API_KEY_exists": "GEMINI_API_KEY" in os.environ,
+            "GEMINI_API_KEY_length": len(value)
+        })
+
     def do_POST(self):
         try:
             length = int(self.headers.get("Content-Length", 0))
