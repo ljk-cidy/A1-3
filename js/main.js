@@ -23,19 +23,22 @@ document.addEventListener('DOMContentLoaded', () => {
         try {
             const response = await fetch('/api/recommend', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ prompt: inputValue })
             });
 
-            const data = await response.json();
+            let data = {};
+            try {
+                data = await response.json();
+            } catch {
+                // JSON이 아닌 응답이면 무시하고 아래에서 상태 코드로 처리
+            }
 
             if (!response.ok) {
                 throw new Error(data.error || `서버 오류 (${response.status})`);
             }
 
-            resultText.innerText = data.result;
+            resultText.innerText = data.result ?? "응답에 결과가 없습니다.";
 
         } catch (error) {
             console.error("AI 호출 에러:", error);
