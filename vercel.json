@@ -1,6 +1,10 @@
 {
   "builds": [
     {
+      "src": "index.html",
+      "use": "@vercel/static"
+    },
+    {
       "src": "api/recommend.py",
       "use": "@vercel/python"
     }
