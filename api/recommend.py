@@ -1,7 +1,7 @@
 # api/recommend.py
 from http.server import BaseHTTPRequestHandler
 import json, os
-import anthropic # type: ignore
+from google import genai
 
 class handler(BaseHTTPRequestHandler):
     def _send(self, status, payload):
@@ -18,16 +18,14 @@ class handler(BaseHTTPRequestHandler):
             if not prompt:
                 return self._send(400, {"error": "prompt가 비어 있습니다."})
 
-            api_key = os.environ.get("ANTHROPIC_API_KEY")
+            api_key = os.environ.get("GEMINI_API_KEY")
             if not api_key:
-                return self._send(500, {"error": "서버에 API 키가 설정되지 않았습니다."})
+                return self._send(500, {"error": "서버에 GEMINI_API_KEY가 설정되지 않았습니다."})
 
-            client = anthropic.Anthropic(api_key=api_key)
-            msg = client.messages.create(
-                model="claude-sonnet-5-5",
-                max_tokens=1000,
-                messages=[{"role": "user", "content": prompt}],
-            )
-            self._send(200, {"result": msg.content[0].text})
+            model = os.environ.get("GEMINI_MODEL", "gemini-3.5-flash")
+            client = genai.Client(api_key=api_key)
+            response = client.models.generate_content(model=model, contents=prompt)
+
+            self._send(200, {"result": response.text or "응답이 비어 있습니다."})
         except Exception as e:
             self._send(500, {"error": str(e)})
